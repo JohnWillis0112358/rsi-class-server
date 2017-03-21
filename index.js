@@ -1,34 +1,38 @@
 // Richwood Scientific Bootcamp
 // Basic Node+Express server for
-// our test company 
+// our test company
 var express = require('express');
-var app = express();  
+var app = express();
 
 // Set the port to listen on. 3000 in this example
 app.set('port', process.env.PORT || 3000);
 
 // Setup to serve statis files
-app.use(express.static(__dirname + '/public')); 
+app.use(express.static(__dirname + '/public'));
 
 // Add / Setup handlebars view engine
 var handlebars = require('express-handlebars');
 // Point to a default template
-app.engine('handlebars', handlebars({defaultLayout: 'main'})); 
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 
 // Add handlebars to the app
-app.set('view engine', 'handlebars'); 
+app.set('view engine', 'handlebars');
 
 // Setup some basic routes
-app.get('/', function(req,res){ 
+app.get('/', function(req,res){
 	// Send the construction page
-	res.render('construction');  
+	res.render('construction');
+});
+app.get('/home', function(req,res){ 
+	// Send the construction page
+	res.render('home');
 });
 
 // If no routes match, send the 404 page
-app.use(function(req,res){  
-	res.status(404); 
-	// Send 404 status code 
-	res.render('404'); 
+app.use(function(req,res){
+	res.status(404);
+	// Send 404 status code
+	res.render('404');
 });
 
 // Finally startup the server
